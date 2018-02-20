@@ -4,19 +4,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Dog extends Animal {
-    private LocalDateTime LastWalk;
+    private LocalDateTime lastWalk;
 
     public boolean NeedsWalk(){
-        return LocalDateTime.now().compareTo(LastWalk) != 0;
+        return LocalDateTime.now().compareTo(lastWalk) != 0;
     }
 
     public Dog(String name, Gender gender) {
         super(name, gender);
-        LastWalk = LocalDateTime.now();
+        lastWalk = LocalDateTime.now();
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", last walk: " + LastWalk.format(DateTimeFormatter.ofPattern("dd-MM-yy"));
+        return super.toString() + ", last walk: " + lastWalk.format(DateTimeFormatter.ofPattern("dd-MM-yy"));
     }
 }
