@@ -66,9 +66,39 @@ public class Main extends Application {
         //endregion
 
         //region Gender
+        ToggleGroup genderGroup = new ToggleGroup();
+
+        RadioButton genderMale = new RadioButton("Male");
+        genderMale.setSelected(true);
+        genderMale.setToggleGroup(genderGroup);
+
+        RadioButton genderFemale = new RadioButton("Female");
+        genderFemale.setToggleGroup(genderGroup);
+
+        ArrayList<Node> genderNodes = new ArrayList<>();
+        genderNodes.add(genderMale);
+        genderNodes.add(genderFemale);
+
+        TitledPane genderTitledPane = createTitledPane("Gender", genderNodes);
+        grid.add(genderTitledPane, 0,2);
+        //endregion
+
+        //region Reserve Animal
+        Text reserveAnimalText = new Text("Name: ");
+        TextField reserveAnimalTextField = new TextField();
+        Button reserveAnimalButton = new Button("Reserve selected animal");
+        ArrayList<Node> animalNodes = new ArrayList<Node>();
+        animalNodes.add(reserveAnimalText);
+        animalNodes.add(reserveAnimalTextField);
+        animalNodes.add(reserveAnimalButton);
+        TitledPane reserveAnimalTitledPane = createTitledPane("Reserve animal", animalNodes);
+        grid.add(reserveAnimalTitledPane, 1,2);
+        //endregion
+
+        //region BadHabits
         TextField badHabitsTextField = new TextField();
         TitledPane badHabitsTitledPane = createTitledPane("Bad habits", badHabitsTextField);
-        grid.add(badHabitsTitledPane, 0,4);
+        grid.add(badHabitsTitledPane, 0,3);
         //endregion
 
         primaryStage.show();
