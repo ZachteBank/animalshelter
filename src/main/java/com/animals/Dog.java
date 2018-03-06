@@ -1,18 +1,22 @@
 package com.animals;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Dog extends Animal {
-    private LocalDateTime LastWalk;
+    private LocalDate LastWalk;
+
+    public LocalDate getLastWalk() {
+        return LastWalk;
+    }
 
     public boolean NeedsWalk(){
-        return LocalDateTime.now().compareTo(LastWalk) != 0;
+        return LocalDate.now().compareTo(LastWalk) != 0;
     }
 
     public Dog(String name, Gender gender) {
         super(name, gender);
-        LastWalk = LocalDateTime.now();
+        LastWalk = LocalDate.now();
     }
 
     @Override
