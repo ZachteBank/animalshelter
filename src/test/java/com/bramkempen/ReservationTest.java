@@ -1,5 +1,6 @@
+package com.bramkempen;
+
 import com.animals.Gender;
-import com.bramkempen.Reservation;
 import junit.framework.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,3 +27,4 @@ public class ReservationTest {
         Assert.assertEquals(1, this.reservation.getAnimals().size());
     }
 }
+

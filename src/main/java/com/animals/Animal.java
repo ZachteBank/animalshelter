@@ -7,6 +7,18 @@ public class Animal {
     private Gender gender;
     private Reservor reservedBy;
 
+    public String getName() {
+        return name;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Reservor getReservedBy() {
+        return reservedBy;
+    }
+
     public Animal(String name, Gender gender) {
         this.name = name;
         this.gender = gender;
@@ -29,6 +41,5 @@ public class Animal {
             reserved = "reserved by " + this.reservedBy.getName();
         }
         return String.format("%s, $s, $s", this.name, this.gender, reserved);
-        //return super.toString();
     }
 }
