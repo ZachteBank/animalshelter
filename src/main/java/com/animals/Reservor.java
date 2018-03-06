@@ -4,17 +4,17 @@ import java.time.*;
 
 public class Reservor {
     private String name;
-    private LocalDateTime reservedAt;
+    private LocalDate reservedAt;
 
     public String getName() {
         return name;
     }
 
-    public LocalDateTime getReservedAt() {
+    public LocalDate getReservedAt() {
         return reservedAt;
     }
 
-    public Reservor(String name, LocalDateTime reservedAt) {
+    public Reservor(String name, LocalDate reservedAt) {
         this.name = name;
         this.reservedAt = reservedAt;
     }

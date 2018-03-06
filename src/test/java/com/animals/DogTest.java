@@ -31,4 +31,5 @@ public class DogTest {
         Assert.assertEquals("John Doe", this.dog.getReservedBy().getName());
         Assert.assertFalse(this.dog.reserve("Jane Doe"));
     }
+
 }
