@@ -40,6 +40,6 @@ public class Animal {
         if(this.reservedBy != null){
             reserved = "reserved by " + this.reservedBy.getName();
         }
-        return String.format("%s, $s, $s", this.name, this.gender, reserved);
+        return String.format("%s, %s, %s", this.name, this.gender, reserved);
     }
 }

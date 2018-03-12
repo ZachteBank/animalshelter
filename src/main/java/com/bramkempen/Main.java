@@ -1,7 +1,12 @@
 package com.bramkempen;
 
 import com.animals.Animal;
+import com.animals.Cat;
+import com.animals.Dog;
+import com.animals.Gender;
 import javafx.application.Application;
+import javafx.beans.value.ObservableStringValue;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,16 +44,6 @@ public class Main extends Application {
 
         Scene scene = new Scene(grid,300,275);
         primaryStage.setScene(scene);
-        //endregion
-
-        //region Species
-        ObservableList<String> speciesOptions = FXCollections.observableArrayList(
-                "Dog",
-                        "Cat"
-        );
-        ComboBox speciesBox = new ComboBox(speciesOptions);
-        TitledPane speciesTitlePane = createTitledPane("Species", speciesBox);
-        grid.add(speciesTitlePane, 0, 0);
         //endregion
 
         //region Name
@@ -97,8 +92,60 @@ public class Main extends Application {
 
         //region BadHabits
         TextField badHabitsTextField = new TextField();
+            badHabitsTextField.setDisable(true);
         TitledPane badHabitsTitledPane = createTitledPane("Bad habits", badHabitsTextField);
         grid.add(badHabitsTitledPane, 0,3);
+        //endregion
+
+        //region AddAnimal
+        Button addAnimalButton= new Button("Add animal");
+            addAnimalButton.setDisable(true);
+        grid.add(addAnimalButton, 0,4);
+        //endregion
+
+        //region Species
+        ObservableList<String> speciesOptions = FXCollections.observableArrayList(
+                "Dog",
+                        "Cat"
+        );
+        ComboBox<String> speciesBox = new ComboBox(speciesOptions);
+        TitledPane speciesTitlePane = createTitledPane("Species", speciesBox);
+        grid.add(speciesTitlePane, 0, 0);
+        //endregion
+
+        //region Listeners
+        speciesBox.getSelectionModel()
+                .selectedItemProperty()
+                .addListener( (ObservableValue<? extends String> observable, String oldValue, String newValue) ->
+                {
+                    badHabitsTextField.setDisable(!newValue.equalsIgnoreCase("Cat"));
+                    addAnimalButton.setDisable(false);
+                });
+
+        addAnimalButton.setOnAction(event -> {
+            Animal animal;
+            Gender gender = ((RadioButton)genderGroup.getSelectedToggle()).getText().equals(Gender.Male.toString()) ? Gender.Male : Gender.Female;
+            if(speciesBox.getSelectionModel().selectedItemProperty().getValue().equalsIgnoreCase("Cat")){
+                animal = new Cat(nameTextField.getText(),
+                        gender,
+                        badHabitsTextField.getText());
+            }else{
+                animal = new Dog(nameTextField.getText(), gender);
+            }
+            animalsOptions.add(animal);
+            animalListView.refresh();
+            System.out.println(animal.toString());
+            System.out.println(animal.getClass().toString());
+            System.out.println(gender.toString());
+        });
+
+        reserveAnimalButton.setOnAction(event -> {
+            Animal animal = animalListView.getSelectionModel().getSelectedItem();
+            if(animal != null){
+                animal.reserve(reserveAnimalTextField.getText());
+                animalListView.refresh();
+            }
+        });
         //endregion
 
         primaryStage.show();
