@@ -25,12 +25,17 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class Main extends Application {
+
+    private Reservation reservation;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
+        reservation = new Reservation();
+
         primaryStage.setTitle("Animal shelter");
 
 
@@ -126,17 +131,15 @@ public class Main extends Application {
             Animal animal;
             Gender gender = ((RadioButton)genderGroup.getSelectedToggle()).getText().equals(Gender.Male.toString()) ? Gender.Male : Gender.Female;
             if(speciesBox.getSelectionModel().selectedItemProperty().getValue().equalsIgnoreCase("Cat")){
-                animal = new Cat(nameTextField.getText(),
+                reservation.newCat(nameTextField.getText(),
                         gender,
                         badHabitsTextField.getText());
             }else{
-                animal = new Dog(nameTextField.getText(), gender);
+                reservation.newDog(nameTextField.getText(), gender);
             }
-            animalsOptions.add(animal);
+            animalsOptions.clear();
+            animalsOptions.addAll(reservation.getAnimals());
             animalListView.refresh();
-            System.out.println(animal.toString());
-            System.out.println(animal.getClass().toString());
-            System.out.println(gender.toString());
         });
 
         reserveAnimalButton.setOnAction(event -> {
